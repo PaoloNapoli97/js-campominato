@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    background-color: aquamarine;
+}
+
+footer {
+    padding: 20px;
+}
+
+/* COMMON */
+
+.d-flex{
+    display: flex;
+}
+
+.button {
+    padding: 2px 20px;
+}
+
+#myForm{
+    padding: 2px 20px;
+}
+
+.camp-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: auto;
+    height: 500px;
+    width: 500px;
+}
+
+.camp-cell-10{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 10);
+    height: calc(100% /10);
+    border: 1px solid black;
+}
+
+.camp-cell-9{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 9);
+    height: calc(100% /9);
+    border: 1px solid black;
+}
+
+.camp-cell-7{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    border: 1px solid black;
+}
+
+.cell-click {
+    background-color: blue;
+}
+
+.cell-bomb {
+    background-color: red;
+}
+
+.points {
+}
