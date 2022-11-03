@@ -1,6 +1,7 @@
 "use strict";
 
 const campContainer = document.querySelector(".camp-container");
+let points = document.getElementById("point").innerHTML = "Premi play per giocare!";
 let classAdd = "";
 let difficultyValue;
 let bombs = [];
@@ -29,23 +30,30 @@ document.getElementById('play').addEventListener('click', function(){
     }
 })
 
+
+
 function camp(campSize){
     campContainer.innerHTML = "";
+    let p = 0;
     for (let i = 1; i <= campSize; i++) {
         const campCell = document.createElement("div");
         campCell.innerHTML = i;
         campCell.classList.add(classAdd);
         campCell.addEventListener("click", function onClick(){
             console.log(this);
+            if (campCell.classList.contains("cell-click")){
+                p = p - 1;
+            }
             this.classList.add("cell-click");
+            points = document.getElementById("point").innerHTML = `Il tuo punteggio é: ${[p = p + 1]}`;
                 for(let j = 0; j < bombs.length; j++) {
                     if( i === bombs[j]){
+                        points = document.getElementById("point").innerHTML = `Hai perso! Il tuo punteggio é: ${[p = p - 1]}`;
                         this.classList.add("cell-bomb");
-                        this.removeEventListener('click', onClick());
+                        this.removeEventListener("click", onClick());
                     }
                 }
         })
-
         campContainer.append(campCell);
     }
 }
