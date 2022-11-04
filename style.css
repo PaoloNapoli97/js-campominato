@@ -53,30 +53,12 @@ footer {
     width: 500px;
 }
 
-.camp-cell-10{
+.camp-cell{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% / 10);
-    height: calc(100% /10);
-    border: 1px solid black;
-}
-
-.camp-cell-9{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 9);
-    height: calc(100% /9);
-    border: 1px solid black;
-}
-
-.camp-cell-7{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% / 7);
-    height: calc(100% / 7);
+    width: calc(100% / var(--colNumber, 10));
+    height: calc(100% / var(--colNumber, 10));
     border: 1px solid black;
 }
 
@@ -93,3 +75,4 @@ footer {
     justify-content: center;
     font-size: 24px;
     padding-bottom: 10px;
+}

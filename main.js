@@ -2,7 +2,6 @@
 
 const campContainer = document.querySelector(".camp-container");
 let points = document.getElementById("point").innerHTML = "Premi play per giocare!";
-let classAdd = "";
 let difficultyValue;
 let bombs = [];
 
@@ -12,49 +11,100 @@ document.getElementById('play').addEventListener('click', function(){
     const difficulty = document.getElementById('difficulty').value;
     if ( difficulty == "easy"){
         difficultyValue = 100;
-        classAdd = "camp-cell-10";
         camp(difficultyValue);
         bombGen(difficultyValue);
     }
     else if ( difficulty == "normal"){
         difficultyValue = 81;
-        classAdd = "camp-cell-9";
         camp(difficultyValue);
         bombGen(difficultyValue);
     }
     else if ( difficulty == "hard"){
         difficultyValue = 49;
-        classAdd = "camp-cell-7";
         camp(difficultyValue);
         bombGen(difficultyValue);
+    }
+
+    //  Correzione in classe \Codice Funzionante
+
+    const cells = document.querySelectorAll('.camp-cell')
+    const numberClicked = [];
+    let gameover = false;
+    for (let i = 0; i< cells.length; i++){
+        cells[i].addEventListener("click", function (){
+
+            if (gameover = false){
+
+                const cellNumber = Number( this.innerHTML );
+
+                if (bombs.includes(cellNumber) ){
+                    this.classList.add('cell-bomb');
+                    gameover = true;
+                    points = document.getElementById("point").innerHTML = `Hai perso! Il tuo punteggio é: ${numberClicked.length}`;
+                } else if ( numberClicked.includes(cellNumber) === false) {
+                    this.classList.add('cell-click');
+                    numberClicked.push(cellNumber);
+                    points = document.getElementById("point").innerHTML = `Il tuo punteggio é: ${numberClicked.length}`;
+                }
+
+
+                if (numberClicked.length === difficultyValue - bombs.length){
+                    points = document.getElementById("point").innerHTML = `Hai vinto! Il tuo punteggio é: ${numberClicked.length}`;
+                    gameover = true;
+                }
+                console.log(numberClicked);
+            }
+
+            if ( gameover){
+                for (let i = 0; i < bombs; i++){
+                    document.querySelector(`.camp-cell:nth-child(${bombs[i]})`).classList.add('cell-bomb');
+                }
+            }
+
+        });
     }
 })
 
 
 
+// funzioni
+
 function camp(campSize){
     campContainer.innerHTML = "";
     let p = 0;
     for (let i = 1; i <= campSize; i++) {
+
         const campCell = document.createElement("div");
         campCell.innerHTML = i;
-        campCell.classList.add(classAdd);
-        campCell.addEventListener("click", function onClick(){
-            console.log(this);
-            if (campCell.classList.contains("cell-click")){
-                p = p - 1;
-            }
-            this.classList.add("cell-click");
-            points = document.getElementById("point").innerHTML = `Il tuo punteggio é: ${[p = p + 1]}`;
-                for(let j = 0; j < bombs.length; j++) {
-                    if( i === bombs[j]){
-                        points = document.getElementById("point").innerHTML = `Hai perso! Il tuo punteggio é: ${[p = p - 1]}`;
-                        this.classList.add("cell-bomb");
-                        this.removeEventListener("click", onClick());
-                    }
-                }
-        })
+        campCell.classList.add('camp-cell');
+        campCell.style = `--colNumber: ${Math.sqrt(campSize)}`;
+
         campContainer.append(campCell);
+
+        //  Mio codice non funzionale
+
+
+    //     let gameover = false;
+    //     if (gameover){
+    //         return
+    //     }
+    //     campCell.addEventListener("click", function (){
+
+    //         console.log(this);
+    //             if (campCell.classList.contains("cell-click")){
+    //                 p = p - 1;
+    //             }
+    //             this.classList.add("cell-click");
+    //             points = document.getElementById("point").innerHTML = `Il tuo punteggio é: ${[p = p + 1]}`;
+    //                 for(let j = 0; j < bombs.length; j++) {
+    //                     if( i === bombs[j]){
+    //                         gameover = true;
+    //                         points = document.getElementById("point").innerHTML = `Hai perso! Il tuo punteggio é: ${[p = p - 1]}`;
+    //                         this.classList.add("cell-bomb");
+
+    //                     }
+    //                 }
+    //     })
     }
 }
 
@@ -69,7 +119,7 @@ function bombGen(difficultyValue){
         let token;
         // Genero il numero
         token = random(1, difficultyValue);
-        if(bombs.indexOf(token) === -1) bombs.push(token)
+        if(bombs.indexOf(token) === - 1) bombs.push(token)
         n++;
     }
     console.log(bombs);
