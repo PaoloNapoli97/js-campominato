@@ -33,7 +33,7 @@ document.getElementById('play').addEventListener('click', function(){
     for (let i = 0; i< cells.length; i++){
         cells[i].addEventListener("click", function (){
 
-            if (gameover = false){
+            if (gameover === false){
 
                 const cellNumber = Number( this.innerHTML );
 
